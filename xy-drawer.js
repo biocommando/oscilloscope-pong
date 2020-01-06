@@ -22,15 +22,15 @@ class XyDrawer extends AudioWorkletProcessor {
         if (this.pixels.length === 0) return true
         
         const dev1OutputChannels = outputDevices[0]
-        const channel1LeftBuffer = dev1OutputChannels[1]
-        const channel1RightBuffer = dev1OutputChannels[0]
+        const channel1LeftBuffer = dev1OutputChannels[0]
+        const channel1RightBuffer = dev1OutputChannels[1]
         
         let pxidx = 0
         
         for (let i = 0; i < channel1LeftBuffer.length; i++) {
             if (pxidx === this.pixels.length) pxidx = 0;
-            channel1LeftBuffer[i] = this.pixels[pxidx].y
-            channel1RightBuffer[i] = this.pixels[pxidx].x
+            channel1LeftBuffer[i] = this.pixels[pxidx].x
+            channel1RightBuffer[i] = this.pixels[pxidx].y
             pxidx++
         }
         return true
