@@ -53,6 +53,6 @@ const start = async (givenProjectId) => {
 let paddleA = 100
 let paddleB = 100
 let ball = [100,100]
-let ballDir = [1, 1]
+let ballDir = [0, 1]
 let paddleADir = 0
 let paddleBDir = 0

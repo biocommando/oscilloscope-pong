@@ -1,0 +1,25 @@
+<img id="myImg" src="test.png" />
+<button onclick="start()">Draw!</button>
+<hr>
+<textarea cols=50 rows=30 id="tarea"></textarea>
+<button onclick="sequenceImages()">As sequence</button>
+<script src="pic-draw.js"></script>
+<script>
+function getJson() {
+    pixels = JSON.parse(tarea.value)
+    start()
+}
+
+function sequenceImages() {
+    const imageSequence = tarea.value.split('\n').map(x => x.split('t=').map(y => y.trim()))
+    let timeOffset = 0
+    imageSequence.forEach(item => {
+        const ms = Number(item[1])
+        setTimeout(() => {
+            myImg.src = item[0]
+            setTimeout(() => start(item[0].includes('.') ? undefined : item[0]), 10)
+        }, timeOffset + ms)
+        timeOffset += ms
+    })
+}
+</script>

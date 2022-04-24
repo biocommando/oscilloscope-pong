@@ -13,8 +13,8 @@ class XyDrawer extends AudioWorkletProcessor {
             this.resolution = data.resolution
         } else if (data.pixels !== undefined) {
             this.pixels = [
-                ...data.pixels.map(px => ({ x: 0.1+0.9*px.x / this.resolution.w, y: 0.1+0.9*px.y / this.resolution.h })),
-                ...data.pixels.map(px => ({ x: -0.1-0.9*px.x / this.resolution.w, y: -0.1-0.9*px.y / this.resolution.h })),        
+                ...data.pixels.map(px => ({ x: 0.1+0.9*px.x / this.resolution.w, y: -0.1-0.9*px.y / this.resolution.h })),
+                ...data.pixels.map(px => ({ x: -0.1-0.9*px.x / this.resolution.w, y: 0.1+0.9*px.y / this.resolution.h })),        
             ]
             this.pxidx = 0
         }
@@ -30,7 +30,7 @@ class XyDrawer extends AudioWorkletProcessor {
         // let pxidx = 0
         
         for (let i = 0; i < channel1LeftBuffer.length; i++) {
-            if (this.pxidx === this.pixels.length) this.pxidx = 0;
+            if (this.pxidx >= this.pixels.length) this.pxidx = 0;
             channel1LeftBuffer[i] = this.pixels[this.pxidx].x
             channel1RightBuffer[i] = this.pixels[this.pxidx].y
             this.pxidx++
